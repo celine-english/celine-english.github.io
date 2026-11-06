@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>셀린영어학원</title>
+<meta name="description" content="셀린영어학원 학생·학부모 앱">
+<meta name="theme-color" content="#FFFFFF">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" href="favicon-48.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="셀린영어">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<style>
+  :root{--navy:#193773;--ink:#0B1324;--sub:#5A6478;--paper:#FFFFFF}
+  html,body{margin:0;height:100%;background:var(--paper);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR",sans-serif}
+  body{overflow:hidden}
+  #app{position:fixed;inset:0;width:100%;height:100%;border:0;display:block;background:var(--paper);padding-top:env(safe-area-inset-top,0px);box-sizing:border-box}
+  #splash{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;background:var(--paper);transition:opacity .35s;z-index:2}
+  #splash img{width:96px;height:96px}
+  #splash b{font-size:20px;letter-spacing:.04em;color:var(--navy)}
+  #splash span{font-size:13px;color:var(--sub)}
+  #splash a{font-size:13px;color:var(--navy);display:none;margin-top:8px}
+  #splash.slow a{display:block}
+  #splash.done{opacity:0;pointer-events:none}
+</style>
+</head>
+<body>
+<div id="splash" role="status" aria-live="polite">
+  <img src="data:image/png;base64,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" alt="">
+  <b>셀린영어</b>
+  <span>앱을 여는 중…</span>
+  <a href="https://script.google.com/macros/s/AKfycbwrFBb_0dt10IpN86N6wckQltX61qYC8YjVmXI2m4JYoKD0CuyNRhDqZ9UXh-uaHNzIXQ/exec" rel="noopener">화면이 안 열리면 여기를 눌러 주세요</a>
+</div>
+<iframe id="app" title="셀린영어학원 앱" src="https://script.google.com/macros/s/AKfycbwrFBb_0dt10IpN86N6wckQltX61qYC8YjVmXI2m4JYoKD0CuyNRhDqZ9UXh-uaHNzIXQ/exec" allow="camera; clipboard-write; fullscreen" referrerpolicy="no-referrer-when-downgrade"></iframe>
+<script>
+  var sp=document.getElementById('splash');
+  document.getElementById('app').addEventListener('load',function(){setTimeout(function(){sp.classList.add('done')},250)});
+  setTimeout(function(){sp.classList.add('slow')},9000);
+  if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){})})}
+</script>
+</body>
+</html>
