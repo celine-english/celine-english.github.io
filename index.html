@@ -74,7 +74,7 @@
   function show(t,s,btn){document.getElementById('push-t').textContent=t;document.getElementById('push-s').textContent=s;go.hidden=!btn;if(btn)go.textContent=btn;box.classList.add('on')}
   function hide(){box.classList.remove('on')}
   function offer(){
-    hide();if(!user)return;
+    hide();if(!user||user.role==='teacher')return; // 선생님 계정은 등하원 알림 안내를 띄우지 않아요
     if(ls(key(user))==='on'&&window.Notification&&Notification.permission==='granted')return;
     if(ls('celine-push-later:'+user.name)&&Date.now()-(+ls('celine-push-later:'+user.name))<3*864e5)return; // 닫으면 3일 뒤 다시
     if(ios&&!standalone){show('알림을 받으려면','공유 버튼 → 「홈 화면에 추가」로 설치한 뒤, 홈 화면 아이콘으로 열어 주세요.',null);return}
