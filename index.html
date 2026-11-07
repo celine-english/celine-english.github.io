@@ -84,8 +84,16 @@
   }
   window.addEventListener('message',function(e){
     if(!/\.googleusercontent\.com$/.test(new URL(e.origin).hostname))return;
-    var d=e.data||{};if(d.type!=='celine-user')return;
-    user=d.user&&d.user.name&&d.user.code?d.user:null;offer();
+    var d=e.data||{};
+    if(d.type==='celine-ready'){ // 앱이 로그인 화면을 띄우면, 기억해 둔 정보로 바로 들어가기
+      var sv=null;try{sv=JSON.parse(ls('celine-login')||'null')}catch(x){}
+      if(sv&&sv.name&&sv.code&&e.source)e.source.postMessage({type:'celine-login',name:sv.name,code:sv.code,role:sv.role},e.origin);
+      return;
+    }
+    if(d.type!=='celine-user')return;
+    user=d.user&&d.user.name&&d.user.code?d.user:null;
+    if(user&&user.keep)ls('celine-login',JSON.stringify({name:user.name,code:user.code,role:user.role}));else ls('celine-login',null); // 「로그인 상태 유지」
+    offer();
   });
   document.getElementById('push-x').addEventListener('click',function(){if(user)ls('celine-push-later:'+user.name,String(Date.now()));hide()});
   go.addEventListener('click',function(){
